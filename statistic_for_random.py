@@ -41,7 +41,7 @@ def get_sb_props(S):
     return ds[-1]
 
 # Load dataset
-df = pd.read_csv('20000_4_dataset.csv')
+df = pd.read_csv('25040_4_dataset.csv')
 
 print(f"Dataset .  size: {len(df)} rows")
 
