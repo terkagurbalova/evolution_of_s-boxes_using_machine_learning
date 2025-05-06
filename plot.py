@@ -41,7 +41,6 @@ for i, (acc, name, color) in enumerate(zip(model_accuracies, model_names, custom
 ax.set_xticks(range(len(model_names)))
 ax.set_xticklabels(model_names)
 ax.set_ylabel("Accuracy (%)")
-# Legenda mimo grafu vpravo
 ax.legend(loc='center left', bbox_to_anchor=(1.02, 0.5), borderaxespad=0.)
 
 plt.grid(True, linestyle='--', alpha=0.5)
