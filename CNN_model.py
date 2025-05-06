@@ -73,7 +73,7 @@ y_train, y_val = y[:split_at], y[split_at:]
 for kl in range(3):
 
     # Model
-    input_layer = layers.Input(shape=(16, 16, 1))
+    input_layer = layers.Input(shape=(size, size, 1))
 
     x = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(input_layer)
     x = layers.MaxPooling2D((2, 2))(x)
@@ -84,10 +84,10 @@ for kl in range(3):
     x = layers.Dense(128, activation='relu')(x)
 
     # Outputs
-    swap_1 = layers.Dense(16, activation='softmax', name='swap_1')(x)
+    swap_1 = layers.Dense(size, activation='softmax', name='swap_1')(x)
     concat_input = layers.Concatenate()([x, swap_1])
     dense_intermediate = layers.Dense(16, activation='relu')(concat_input)
-    swap_2 = layers.Dense(16, activation='softmax', name='swap_2')(dense_intermediate)
+    swap_2 = layers.Dense(size, activation='softmax', name='swap_2')(dense_intermediate)
 
     model = Model(inputs=input_layer, outputs=[swap_1, swap_2])
 
