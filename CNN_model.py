@@ -86,7 +86,7 @@ for kl in range(3):
     # Outputs
     swap_1 = layers.Dense(size, activation='softmax', name='swap_1')(x)
     concat_input = layers.Concatenate()([x, swap_1])
-    dense_intermediate = layers.Dense(16, activation='relu')(concat_input)
+    dense_intermediate = layers.Dense(size, activation='relu')(concat_input)
     swap_2 = layers.Dense(size, activation='softmax', name='swap_2')(dense_intermediate)
 
     model = Model(inputs=input_layer, outputs=[swap_1, swap_2])
