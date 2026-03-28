@@ -154,8 +154,7 @@ for s in range(100):
 
     # Conversion back to (i, j) pairs
     top_swaps = [divmod(index, 256) for index in top_indices]
-
-    while m < 1000:
+    for ter in range(1000):
 
         x = top_swaps[m][0]
         y = top_swaps[m][1]
@@ -177,7 +176,7 @@ for s in range(100):
             is_correct = True
         if is_correct:
             sboxes_model[s] = random_affine_transform(swapped_sbox)
-            # m = 0
+            m = 0
             preds = model.predict(np.array([one_hot_encode(sboxes_model[s], size, size)]), verbose=0)[
                 0]  # Get predictions
 
