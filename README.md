@@ -21,14 +21,20 @@ The script used to generate datasets is: `dataset_generate.py`
 Two datasets are already provided and were used in experiments:
 
 - One for `4×4` S-boxes (16 entries)
-- One for `8×8` S-boxes (256 entries)  
-Each contains `25,040` samples.
+- One for `8×8` S-boxes (256 entries)
+
+Additionally, a special dataset for 8×8 S-boxes is provided:
+
+- It contains **50% of S-boxes with differential uniformity 8** and **50% with differential uniformity 10**
+- It is generated using `dataset_generate_50_50.py`
+
+All contains `25,040` samples.
 
 ---
 
 ## Models
 
-We implemented two models for swap prediction:
+We implement two models for swap prediction:
 
 - A **Seq2Seq** model
 - A **CNN-based** model
@@ -43,22 +49,35 @@ To work with different S-box sizes (`4×4` or `8×8`), update the following para
 
 ## Statistics
 
-We provide two scripts for statistical analysis:
+We provide four scripts for statistical analysis:
 
-- `statistic_for_random.py`:  
+- `statistic_for_random.py`:
+  
   Computes mean accuracy and variance of random swaps improving differential spectrum.
-- `t_test.py`:  
+- `t_test.py`:
+  
   Performs a t-test and computes p-values to compare model-generated swaps vs. random swaps.
+- `statistic_for_sboxes_8.py`:
+  
+  Computes differencial spetrum statistic for S-boxes in the dataset.
+- `testing_prediction_for50_50.py`
+  
+  Evaluates whether the best-performing model achieves better results than random swaps on.
 
 ---
 
-## Predictor
+## Predictors
 
-The script `predictor.py` implements a **sequential predictor** using:
+We implemet three types of predistors:
 
+All predictors implement a **sequential predictor** using:
 - **Random predictor** (baseline)
 - **Model-based predictor**, using the best-performing trained model:  
   `my_model_9_24_52.keras`
+  
+Additional variants:
+- The script `predictor_affin_fucntion.py` uses an affine function to modify the S-box after applying an improving swap.
+- The script `predictor_whole_swap.py` selects swaps as pairs (i, j), rather than as separate values i and j.
 
 ---
 
